@@ -1,0 +1,84 @@
+/* Basic reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Responsive menu container */
+  .menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  /* Hamburger icon */
+  .menu-icon {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+  }
+  
+  .menu-icon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.4s;
+  }
+  
+  /* Menu items */
+  .menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-item {
+    margin-right: 20px;
+  }
+  
+  .menu-item a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+  }
+  
+  .menu-item a:hover {
+    color: #ddd;
+  }
+  
+  /* Media query for responsive design */
+  @media (max-width: 768px) {
+    .menu-icon {
+      display: flex;
+    }
+  
+    .menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #333;
+      width: 100%;
+      padding: 20px;
+      z-index: 1;
+    }
+  
+    .menu.active {
+      display: flex;
+    }
+  
+    .menu-item {
+      margin: 10px 0;
+    }
+  
+    .menu-item:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
