@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Menu Bar</title>
+
   <style>
+
+:host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
     /* Basic reset */
 /* Basic reset */
 body {
@@ -110,6 +113,72 @@ table tr:hover {
 
 
 
+.page-container {
+  display: flex;
+  width: 100%;
+}
+
+.table-container {
+  flex: 1; /* Take up remaining width */
+  padding: 20px;
+  overflow: auto;
+}
+
+.details-container {
+  flex: 0 0 30%; /* Fixed width of 30% */
+  background-color: #313631;
+  padding: 20px;
+}
+
+
+.details-column {
+  position: relative;
+}
+
+.details-content {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  padding: 10px;
+  background-color: #f2f2f2;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 200px;
+  border-radius: 4px;
+  display: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+tr:hover .details-content {
+  display: block;
+  opacity: 1;
+  transform: translateX(-100%);
+}
+
+/* Add horizontal lines between table rows */
+table tr {
+  border-bottom: 1px solid #ffffff;
+}
+
+/* Remove border for the last row */
+table tr:last-child {
+  border-bottom: none;
+}
+
+/* Highlight row on hover and show details */
+table tr:hover {
+  background-color: #e0ffea;
+  cursor: pointer;
+}
+
+p{
+  color: #dee7e0;
+}
+
+
+
+
+
 
     /* Media query for responsive design */
     @media (max-width: 768px) {
@@ -146,49 +215,84 @@ table tr:hover {
         padding: 5px; /* Reduce padding for smaller screens */
         font-size: 12px; /* Reduce font size for smaller screens */
          }
+
+         .page-container {
+    flex-direction: column-reverse; /* Reverse order for mobile: details below table */
+  }
+
+  .details-container {
+    flex: 1; /* Take up full width on smaller screens */
+    display: block; /* Show the details section */
+    margin-top: 20px;
+  }
       
     }
-  </style>
-</head>
-<body>
-  <!-- Responsive menu bar -->
-  <div class="menu-container">
-    <img src="https://tinyurl.com/y4e2jrwp" alt="logo" width="40">
-    <label class="menu-icon" for="menu-toggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </label>
-    <ul class="menu">
-      <li class="menu-item"><a href="#">Home</a></li>
-      <li class="menu-item"><a href="#">About</a></li>
-      <li class="menu-item"><a href="#form-container">Register</a></li> <!-- Added ID to link to the form -->
-      <li class="menu-item"><a href="#">Contact</a></li>
-    </ul>
-  </div>
 
-  <!-- Form section -->
-  <div id="form-container" class="form-container">
-    <h2>New Student Register</h2>
+
+
+  </style>
+
+
+  <!-- Responsive menu bar -->
+<!-- Responsive menu bar -->
+<div class="menu-container">
+  <img src="https://tinyurl.com/y4e2jrwp" alt="logo" width="40">
+  <label class="menu-icon" for="menu-toggle">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </label>
+  <ul class="menu">
+    <li class="menu-item"><a href="#">Home</a></li>
+    <li class="menu-item"><a href="#">About</a></li>
+    <li class="menu-item"><a href="#form-container">Register</a></li> <!-- Added ID to link to the form -->
+    <li class="menu-item"><a href="#">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Student registration table and details -->
+<div class="page-container">
+  <!-- Left side: Student registration table -->
+  <div class="table-container">
+
+    <h2 style="text-align: center;">Student Details</h2>
+
     <table>
-        <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Address</th>
-        </thead>
-        <tbody>
-            <tr *ngFor = "let register of stuRegister" >
-                <td>{{register.firstName}}</td>
-                <td>{{register.lastName}}</td>
-                <td>{{register.mobile}}</td>
-                <td>{{register.email}}</td>
-                <td>{{register.address}}</td>
-            </tr>
-        </tbody>
+      <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Address</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let register of stuRegister" (click)="toggleDetails(register)">
+          <td>{{register.firstName}}</td>
+          <td>{{register.lastName}}</td>
+          <td>{{register.mobile}}</td>
+          <td>{{register.email}}</td>
+          <td>{{register.address}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
+
+  <!-- Right side: Details section -->
+  <ng-container *ngIf="selectedRegister">
+    <div class="details-container">
+      <p style="font-weight: 600; text-align: center; font-size: 20px;">{{selectedRegister.firstName}}  {{selectedRegister.lastName}}</p>
+      <p>First Name: {{selectedRegister.firstName}}</p>
+      <p>Last Name: {{selectedRegister.lastName}}</p>
+      <p>Student ID: {{selectedRegister.id}}</p>
+      <p>Mobile: {{selectedRegister.mobile}}</p>
+      <p>Email: {{selectedRegister.email}}</p>
+      <p>Address: {{selectedRegister.address}}</p>
+      <p>Date of Birth: {{selectedRegister.dob}}</p>
+
+    </div>
+  </ng-container>
+</div>
+
 
   <!-- Your page content here -->
 
@@ -198,5 +302,5 @@ table tr:hover {
       document.querySelector('.menu').classList.toggle('active');
     });
   </script>
-</body>
-</html>
+  
+

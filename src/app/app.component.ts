@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { StudentRegistration } from './models/student-resitration';
-import { StudentResitrationService } from './service/student-resitration.service';
+import { StudentRegistrationService } from './service/student-registration.service';
 
 
 
@@ -13,12 +13,25 @@ export class AppComponent {
   title = 'StuRegisSystem';
   stuRegister: StudentRegistration [] = [];
 
-  constructor(private StudentResitrationService : StudentResitrationService) {}
+  constructor(private studentRegistrationService: StudentRegistrationService) {}
 
-  ngOnInit() : void {
-    this.stuRegister = this.StudentResitrationService.getStudentRegistration();
-    console.log(this.stuRegister);
+  ngOnInit(): void {
+    this.studentRegistrationService
+      .getStudentRegistration()
+      .subscribe((results: StudentRegistration[]) => (this.stuRegister = results));
   }
+  
+
+  selectedRegister: any = null;
+
+  toggleDetails(register: any) {
+    if (this.selectedRegister === register) {
+      this.selectedRegister = null;
+    } else {
+      this.selectedRegister = register;
+    }
+  }
+
 
 
 
