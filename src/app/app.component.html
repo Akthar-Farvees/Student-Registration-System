@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Menu Bar</title>
+  <style>
+    /* Basic reset */
+/* Basic reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  /* text-transform: uppercase; */
+}
+
+/* Responsive menu container */
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #09bd12;
+  padding: 10px;
+}
+
+/* Hamburger icon */
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.menu-icon .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  transition: 0.4s;
+}
+
+/* Menu items */
+.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* text-transform: uppercase; */
+}
+
+.menu-item {
+  margin-right: 20px;
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: white;
+  position: relative;
+  transition: color 0.3s;
+}
+
+/* Underline effect */
+.menu-item a::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: #ddd;
+  bottom: -5px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+/* Left-to-right animation on hover */
+.menu-item a:hover::before {
+  width: 100%;
+}
+
+
+/* Center-align the table */
+.form-container {
+  text-align: center; /* Center align the text inside the container */
+  margin-top: 40px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+table {
+  margin: 0 auto; /* Center the table horizontally */
+  border-collapse: collapse; /* Collapse borders to prevent spacing */
+  width: 100%; /* Set the table width to 100% of the container */
+}
+
+table th,
+table td {
+  padding: 10px; /* Add padding to cells */
+  border: 1px solid #ddd; /* Add borders to cells */
+  width: calc(100% / 5); /* Set the width of each column to 20% (2 columns out of 5) */
+  box-sizing: border-box; /* Include padding and borders in the width calculation */
+}
+
+/* Style for the table header */
+table th {
+  background-color: #f2f2f2; /* Gray background for headers */
+  font-weight: bold;
+}
+
+table tr:hover {
+  cursor: pointer;
+}
+
+
+
+
+    /* Media query for responsive design */
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: flex;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #333;
+        width: 100%;
+        padding: 20px;
+        z-index: 1;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu-item {
+        margin: 10px 0;
+      }
+
+      .menu-item:last-child {
+        margin-bottom: 0;
+      }
+
+      table th,
+      table td {
+        padding: 5px; /* Reduce padding for smaller screens */
+        font-size: 12px; /* Reduce font size for smaller screens */
+         }
+      
+    }
+  </style>
+</head>
+<body>
+  <!-- Responsive menu bar -->
+  <div class="menu-container">
+    <img src="https://tinyurl.com/y4e2jrwp" alt="logo" width="40">
+    <label class="menu-icon" for="menu-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </label>
+    <ul class="menu">
+      <li class="menu-item"><a href="#">Home</a></li>
+      <li class="menu-item"><a href="#">About</a></li>
+      <li class="menu-item"><a href="#form-container">Register</a></li> <!-- Added ID to link to the form -->
+      <li class="menu-item"><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Form section -->
+  <div id="form-container" class="form-container">
+    <h2>New Student Register</h2>
+    <table>
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Address</th>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let register of stuRegister" >
+                <td>{{register.firstName}}</td>
+                <td>{{register.lastName}}</td>
+                <td>{{register.mobile}}</td>
+                <td>{{register.email}}</td>
+                <td>{{register.address}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <!-- Your page content here -->
+
+  <script>
+    // Toggle menu on label click
+    document.querySelector('.menu-icon').addEventListener('click', function() {
+      document.querySelector('.menu').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
