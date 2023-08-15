@@ -12,6 +12,7 @@ import { StudentRegistrationService } from './service/student-registration.servi
 export class AppComponent {
   title = 'StuRegisSystem';
   stuRegister: StudentRegistration [] = [];
+  studentToEdit?: StudentRegistration;
 
   constructor(private studentRegistrationService: StudentRegistrationService) {}
 
@@ -21,6 +22,20 @@ export class AppComponent {
       .subscribe((results: StudentRegistration[]) => (this.stuRegister = results));
   }
   
+  showForm: boolean = false; // Initialize to false
+
+  initStudent() {
+      this.showForm = !this.showForm;
+      this.studentToEdit = new StudentRegistration();
+  }
+
+  editStudent(student: StudentRegistration) {
+      this.studentToEdit = student;
+  }
+
+  updateStudentList(students: StudentRegistration[]) {
+    this.stuRegister = students;
+  }
 
   selectedRegister: any = null;
 

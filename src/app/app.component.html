@@ -243,17 +243,26 @@ p{
     <span class="bar"></span>
   </label>
   <ul class="menu">
-    <li class="menu-item"><a href="#">Home</a></li>
+    <li class="menu-item"><a href="#page-container">Home</a></li>
+    <li class="menu-item"><a href="#" (click)="initStudent()">Register</a></li> <!-- Added ID to link to the form -->
     <li class="menu-item"><a href="#">About</a></li>
-    <li class="menu-item"><a href="#form-container">Register</a></li> <!-- Added ID to link to the form -->
-    <li class="menu-item"><a href="#">Contact</a></li>
   </ul>
 </div>
+
+<app-edit-student [student]="studentToEdit" (StudentsUpdated)="updateStudentList($event)"></app-edit-student>
+
+
+<!-- <button (click)="initStudent()">Create New Student</button> -->
+
+
+
 
 <!-- Student registration table and details -->
 <div class="page-container">
   <!-- Left side: Student registration table -->
   <div class="table-container">
+
+    
 
     <h2 style="text-align: center;">Student Details</h2>
 
@@ -264,6 +273,7 @@ p{
         <th>Mobile</th>
         <th>Email</th>
         <th>NIC</th>
+        <th>Action</th>
       </thead>
       <tbody>
         <tr *ngFor="let register of stuRegister" (click)="toggleDetails(register)">
@@ -272,6 +282,7 @@ p{
           <td>{{register.mobile}}</td>
           <td>{{register.email}}</td>
           <td>{{register.nic}}</td>
+          <td><button (click)="editStudent(register)">Edit</button></td>
         </tr>
       </tbody>
     </table>
@@ -293,6 +304,8 @@ p{
     </div>
   </ng-container>
 </div>
+
+
 
 
   <!-- Your page content here -->

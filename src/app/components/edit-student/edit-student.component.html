@@ -1,1 +1,16 @@
-<p>edit-student works!</p>
+<div *ngIf="student">
+    <!-- <h2>{{ student.firstName }}</h2> -->
+    <div>
+        <input [(ngModel)]="student.firstName" placeholder="First Name">
+        <input [(ngModel)]="student.lastName" placeholder="Last Name">
+        <input [(ngModel)]="student.mobile" placeholder="Mobile No"><br>
+        <input [(ngModel)]="student.email" placeholder="Email">
+        <input [(ngModel)]="student.nic" placeholder="NIC">
+        <input [(ngModel)]="student.dob" placeholder="DOB">
+        <input [(ngModel)]="student.address" placeholder="Address">
+    </div>
+    
+    <button (click)="updateStudent(student)" *ngIf="student.id">Save</button>
+    <button (click)="deleteStudent(student)" *ngIf="student.id">Delete</button>
+    <button (click)="createStudent(student)" *ngIf="!student.id">Create</button>
+</div>

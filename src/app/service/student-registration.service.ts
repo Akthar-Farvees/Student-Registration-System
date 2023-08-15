@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +20,19 @@ export class StudentRegistrationService {
   public getStudentRegistration(): Observable<StudentRegistration[]> {
     return this.http.get<StudentRegistration[]>(`${environment.apiUrl}/${this.url}`);
   }
+
+
+  public updateStudent (student: StudentRegistration): Observable<StudentRegistration[]> {
+    return this.http.put<StudentRegistration[]>(`${environment.apiUrl}/${this.url}`, student);
+  }
   
+  public createStudent (student: StudentRegistration): Observable<StudentRegistration[]> {
+    return this.http.post<StudentRegistration[]>(`${environment.apiUrl}/${this.url}`, student);
+  }
   
+  public deleteStudent (student: StudentRegistration): Observable<StudentRegistration[]> {
+    return this.http.delete<StudentRegistration[]>(`${environment.apiUrl}/${this.url}/${student.id}`);
+  }
 
 
 }
