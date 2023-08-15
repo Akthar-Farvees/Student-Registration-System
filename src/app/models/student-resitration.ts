@@ -6,6 +6,7 @@ export class StudentRegistration {
     email = "";
     dob = "";
     address = "";
+    nic = "";
 
 
 }
