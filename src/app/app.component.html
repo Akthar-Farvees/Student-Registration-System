@@ -263,7 +263,7 @@ p{
         <th>Last Name</th>
         <th>Mobile</th>
         <th>Email</th>
-        <th>Address</th>
+        <th>NIC</th>
       </thead>
       <tbody>
         <tr *ngFor="let register of stuRegister" (click)="toggleDetails(register)">
@@ -271,7 +271,7 @@ p{
           <td>{{register.lastName}}</td>
           <td>{{register.mobile}}</td>
           <td>{{register.email}}</td>
-          <td>{{register.address}}</td>
+          <td>{{register.nic}}</td>
         </tr>
       </tbody>
     </table>
@@ -287,6 +287,7 @@ p{
       <p>Mobile: {{selectedRegister.mobile}}</p>
       <p>Email: {{selectedRegister.email}}</p>
       <p>Address: {{selectedRegister.address}}</p>
+      <p>NIC: {{selectedRegister.nic}}</p>
       <p>Date of Birth: {{selectedRegister.dob}}</p>
 
     </div>
