@@ -1,6 +1,8 @@
 
   <style>
 
+
+
 :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: #333;
@@ -59,6 +61,8 @@ body {
   color: white;
   position: relative;
   transition: color 0.3s;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 /* Underline effect */
@@ -88,27 +92,36 @@ body {
 }
 
 table {
-  margin: 0 auto; /* Center the table horizontally */
-  border-collapse: collapse; /* Collapse borders to prevent spacing */
+  margin: 0 auto; /*Center the table horizontally*/
+  border-collapse: collapse; /*Collapse borders to prevent spacing
   width: 100%; /* Set the table width to 100% of the container */
+  text-align: center;
+  
 }
 
 table th,
 table td {
   padding: 10px; /* Add padding to cells */
-  border: 1px solid #ddd; /* Add borders to cells */
+  /* border: 1px solid #ddd; Add borders to cells */
   width: calc(100% / 5); /* Set the width of each column to 20% (2 columns out of 5) */
   box-sizing: border-box; /* Include padding and borders in the width calculation */
 }
 
 /* Style for the table header */
 table th {
-  background-color: #f2f2f2; /* Gray background for headers */
-  font-weight: bold;
+  background-color: #393939; /* Gray background for headers */
+  font-weight: 500;
+  color: #09bd12;
+  text-transform: uppercase;
 }
 
 table tr:hover {
   cursor: pointer;
+}
+
+tbody{
+  background-color: #222;
+  color: gray;
 }
 
 
@@ -116,18 +129,21 @@ table tr:hover {
 .page-container {
   display: flex;
   width: 100%;
+  
+  border-radius: 100;
 }
 
 .table-container {
   flex: 1; /* Take up remaining width */
-  padding: 20px;
-  overflow: auto;
+  padding: 30px;
+  border-radius: 50px;
 }
 
 .details-container {
   flex: 0 0 30%; /* Fixed width of 30% */
   background-color: #313631;
   padding: 20px;
+  
 }
 
 
@@ -157,7 +173,7 @@ tr:hover .details-content {
 
 /* Add horizontal lines between table rows */
 table tr {
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 0.5px solid #555555;
 }
 
 /* Remove border for the last row */
@@ -167,7 +183,7 @@ table tr:last-child {
 
 /* Highlight row on hover and show details */
 table tr:hover {
-  background-color: #e0ffea;
+  background-color: #424242;
   cursor: pointer;
 }
 
@@ -175,6 +191,64 @@ p{
   color: #dee7e0;
 }
 
+
+/* Edit Button Design */
+.bubbly-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #09bd12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  }
+
+  .bubbly-button:hover {
+    background-color: #0a8010;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .bubbly-button:before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+    transform: translate(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .bubbly-button:hover:before {
+    opacity: 1;
+    transform: translate(-50%) scale(1);
+  }
+/* End Edit Button Design */
+
+/* Style for user images */
+.userImg {
+  width: 45px; /* Set the width of the user images */
+  height: 45px; /* Set the height of the user images */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire box */
+  margin-right: 20px; /* Add some spacing between the image and the text */
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+/* Add a class to the first cell of each row to center the image vertically */
+td:first-child {
+  display: flex;
+  align-items: center;
+}
 
 
 
@@ -229,6 +303,73 @@ p{
     }
 
 
+    .form-container {
+  /* Existing styles... */
+  transition: opacity 0.3s, max-height 0.3s, padding 0.3s;
+  opacity: 0;
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.form-container.active {
+  opacity: 1;
+  max-height: 1000px; /* Adjust as needed */
+  padding: 20px; /* Adjust as needed */
+}
+
+
+/* Add these styles to your existing CSS code */
+
+/* Styling for the search input field */
+.menu-container .menu .menu-item input[type="text"] {
+  width: 200px;
+  padding: 5px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 14px;
+  transition: width 0.3s, padding 0.3s, border-color 0.3s;
+}
+
+.menu-container .menu .menu-item input[type="text"]:focus {
+  width: 250px;
+  padding: 8px;
+  border: 1px solid #a5a5a5; /* Change border color when focused */
+  outline: none; /* Remove the default focus outline */
+  /* box-shadow: 0 0 3px #666; Add a subtle shadow when focused */
+}
+
+
+/* Smooth scroll class */
+.smooth-scroll {
+  scroll-behavior: smooth; /* Enables smooth scrolling behavior */
+  transition: 0.6s ease-in-out; /* Transition timing for smooth scroll */
+}
+
+
+#scrollToTopButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: #313631;
+  color: #09bd12;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 999; /* Ensure the button appears above other content */
+}
+
+
+
+
 
   </style>
 
@@ -244,25 +385,34 @@ p{
   </label>
   <ul class="menu">
     <li class="menu-item"><a href="#page-container">Home</a></li>
-    <li class="menu-item"><a href="#" (click)="initStudent()">Register</a></li> <!-- Added ID to link to the form -->
-    <li class="menu-item"><a href="#">About</a></li>
+    <li class="menu-item"><a href="#form-container" (click)="initStudent()">Register</a></li>
+    <!-- Use ngIf to conditionally show/hide search input field -->
+    <li class="menu-item">
+      <a href="#" (click)="toggleSearchInput()">Search</a>
+      <input *ngIf="showSearchInput" name="search" type="text" placeholder="Search..." [(ngModel)]="searchQuery" (input)="performSearch(searchQuery)">
+    </li>
+    
+    <!-- Other menu items... -->
   </ul>
 </div>
 
-<app-edit-student [student]="studentToEdit" (StudentsUpdated)="updateStudentList($event)"></app-edit-student>
+
+<!-- <div class="smooth-scroll"> -->
+  <!-- Content here -->
 
 
-<!-- <button (click)="initStudent()">Create New Student</button> -->
+<div class="form-container" [class.active]="showForm">
+  <!-- Your form content here -->
+    <!-- <button (click)="initStudent()">Create New Student</button> -->
+<app-edit-student [student]="studentToEdit"  (StudentsUpdated)="updateStudentList($event)"></app-edit-student>
 
-
+</div>
 
 
 <!-- Student registration table and details -->
 <div class="page-container">
   <!-- Left side: Student registration table -->
   <div class="table-container">
-
-    
 
     <h2 style="text-align: center;">Student Details</h2>
 
@@ -276,15 +426,17 @@ p{
         <th>Action</th>
       </thead>
       <tbody>
-        <tr *ngFor="let register of stuRegister" (click)="toggleDetails(register)">
-          <td>{{register.firstName}}</td>
-          <td>{{register.lastName}}</td>
-          <td>{{register.mobile}}</td>
-          <td>{{register.email}}</td>
-          <td>{{register.nic}}</td>
-          <td><button (click)="editStudent(register)">Edit</button></td>
+        <tr *ngFor="let register of (showSearchInput ? filteredStuRegister : stuRegister)" (click)="toggleDetails(register)">
+          <td><img class="userImg" src="https://tinyurl.com/yc3327r4" alt="userImg"/> {{ register.firstName }}</td>
+          <td>{{ register.lastName }}</td>
+          <td>{{ register.mobile }}</td>
+          <td>{{ register.email }}</td>
+          <td>{{ register.nic }}</td>
+          <td><button class="bubbly-button" (click)="editStudent(register)"><i class="fal fa-edit" style="color: #ffffff;"></i>Edit</button></td>
         </tr>
       </tbody>
+      
+      
     </table>
   </div>
 
@@ -306,9 +458,17 @@ p{
 </div>
 
 
+<button id="scrollToTopButton" (click)="scrollToTop()">
+Up
+</button>
 
 
-  <!-- Your page content here -->
+
+
+
+<!-- </div> -->
+
+
 
   <script>
     // Toggle menu on label click

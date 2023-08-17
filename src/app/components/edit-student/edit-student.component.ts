@@ -17,6 +17,7 @@ export class EditStudentComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  
   updateStudent (student: StudentRegistration) {
     this.studentRegistrationService
       .updateStudent(student)

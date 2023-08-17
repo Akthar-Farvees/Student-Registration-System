@@ -1,16 +1,93 @@
-<div *ngIf="student">
-    <!-- <h2>{{ student.firstName }}</h2> -->
-    <div>
+<style>
+    .input-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px; /* Add some spacing between the rows */
+    padding: auto;
+    margin-top: 5px;
+}
+
+.input-row input {
+    width: calc(100% / 7); /* Distribute the width equally among the inputs */
+    height: 40px;
+    margin-right: 10px; /* Add some spacing between the inputs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+/* Edit Button Design */
+.bubbly-button {
+    margin-left: 10px;
+    margin-right: auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #09bd12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  }
+
+  .bubbly-button:hover {
+    background-color: #0a8010;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .bubbly-button:before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+    transform: translate(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .bubbly-button:hover:before {
+    opacity: 1;
+    transform: translate(-50%) scale(1);
+  }
+
+  .bubbly-button.delete-button {
+    background-color: red;
+  }
+/* End Edit Button Design */
+
+
+
+
+
+</style>
+
+
+<div *ngIf="student" class="form-container">
+    <div class="input-row">
         <input [(ngModel)]="student.firstName" placeholder="First Name">
         <input [(ngModel)]="student.lastName" placeholder="Last Name">
-        <input [(ngModel)]="student.mobile" placeholder="Mobile No"><br>
+        <input [(ngModel)]="student.mobile" placeholder="Mobile No">
         <input [(ngModel)]="student.email" placeholder="Email">
         <input [(ngModel)]="student.nic" placeholder="NIC">
         <input [(ngModel)]="student.dob" placeholder="DOB">
         <input [(ngModel)]="student.address" placeholder="Address">
     </div>
+
+    <button class="bubbly-button" (click)="updateStudent(student)" *ngIf="student.id">Update</button>
+    &nbsp;&nbsp;
+    <button class="bubbly-button delete-button" (click)="deleteStudent(student)" *ngIf="student.id">Delete</button>
     
-    <button (click)="updateStudent(student)" *ngIf="student.id">Save</button>
-    <button (click)="deleteStudent(student)" *ngIf="student.id">Delete</button>
-    <button (click)="createStudent(student)" *ngIf="!student.id">Create</button>
+    <button class="bubbly-button" (click)="createStudent(student)" *ngIf="!student.id">Create</button>
+    
+
 </div>
